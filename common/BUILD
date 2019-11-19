@@ -8,3 +8,12 @@ cc_library(
     hdrs = ["argparser.h"],
     deps = [],
 )
+
+cc_library(
+    name = "util",
+    srcs = [],
+    hdrs = ["util.h"],
+    deps = [
+        "@opencv3//:common",
+    ],
+)
