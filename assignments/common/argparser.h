@@ -18,7 +18,7 @@ class Args {
  public:
   std::string data_dir;
   std::string save_dir;
-  std::string vedioname;
+  std::string videoname;
   bool help{false};
 
  public:
@@ -30,7 +30,7 @@ class Args {
           {"help", no_argument, 0, 'h'},
           {"datadir", required_argument, 0, 'd'},
           {"savedir", required_argument, 0, 's'},
-          {"vedioname", required_argument, 0, 'v'},
+          {"videoname", required_argument, 0, 'v'},
           {nullptr, 0, nullptr, 0}};
 
       int option_index = 0;
@@ -61,7 +61,7 @@ class Args {
           break;
         case 'v':
           if (optarg) {
-            vedioname = optarg;
+            videoname = optarg;
           } else {
             std::cerr
                 << "videoname requires argument to match the input vedio file"
@@ -74,8 +74,8 @@ class Args {
       }
     }
 
-    if (data_dir.empty() || save_dir.empty() || vedioname.empty()) {
-      std::cerr << "datadir, savedir, vedioname must be sprcified" << std::endl;
+    if (data_dir.empty() || save_dir.empty() || videoname.empty()) {
+      std::cerr << "datadir, savedir, videoname must be sprcified" << std::endl;
       return false;
     }
     return true;

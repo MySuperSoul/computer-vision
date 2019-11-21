@@ -35,8 +35,9 @@ int main(int argc, char **argv) {
   }
 
   std::string video_full_path =
-      cv_project::cv_common::GetValidFullPath(args.data_dir) + args.vedioname;
-  cv_project::assignment1::VedioProcessor processor(video_full_path);
-  processor.Play(false);
+      cv_project::cv_common::GetValidFullPath(args.data_dir) + args.videoname;
+  cv_project::assignment1::VedioProcessor processor(video_full_path,
+                                                    args.save_dir);
+  processor.Play(true);
   return 0;
 }
