@@ -17,7 +17,7 @@ class Args {
 
  public:
   std::string data_dir;
-  std::string save_dir;
+  std::string save_path;
   std::string videoname;
   bool help{false};
 
@@ -29,7 +29,7 @@ class Args {
       static struct option long_options[] = {
           {"help", no_argument, 0, 'h'},
           {"datadir", required_argument, 0, 'd'},
-          {"savedir", required_argument, 0, 's'},
+          {"savepath", required_argument, 0, 's'},
           {"videoname", required_argument, 0, 'v'},
           {nullptr, 0, nullptr, 0}};
 
@@ -52,9 +52,9 @@ class Args {
           break;
         case 's':
           if (optarg) {
-            save_dir = optarg;
+            save_path = optarg;
           } else {
-            std::cerr << "savedir requires argument to specify the output dir."
+            std::cerr << "savepath requires argument to specify the output dir."
                       << std::endl;
             return false;
           }
@@ -74,8 +74,9 @@ class Args {
       }
     }
 
-    if (data_dir.empty() || save_dir.empty() || videoname.empty()) {
-      std::cerr << "datadir, savedir, videoname must be sprcified" << std::endl;
+    if (data_dir.empty() || save_path.empty() || videoname.empty()) {
+      std::cerr << "datadir, savepath, videoname must be sprcified"
+                << std::endl;
       return false;
     }
     return true;

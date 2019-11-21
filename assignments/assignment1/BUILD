@@ -6,16 +6,26 @@ cc_binary(
     name = "assignment1",
     srcs = ["main.cc"],
     deps = [
-        ":vedio_processor",
+        ":video_processor",
         "//computer-vision/assignments/common:argparser",
         "//computer-vision/assignments/common:util",
     ],
 )
 
 cc_library(
-    name = "vedio_processor",
-    srcs = ["VedioProcessor.cc"],
-    hdrs = ["VedioProcessor.h"],
+    name = "video_processor",
+    srcs = ["VideoProcessor.cc"],
+    hdrs = ["VideoProcessor.h"],
+    deps = [
+        ":image_processor",
+        "@opencv3//:common",
+    ],
+)
+
+cc_library(
+    name = "image_processor",
+    srcs = ["ImageProcessor.cc"],
+    hdrs = ["ImageProcessor.h"],
     deps = [
         "@opencv3//:common",
     ],

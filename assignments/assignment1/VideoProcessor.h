@@ -1,19 +1,22 @@
-#ifndef COMPUTER_VISION_ASSIGNMENTS_VEDIO_PROCESSOR_H_
-#define COMPUTER_VISION_ASSIGNMENTS_VEDIO_PROCESSOR_H_
+#ifndef COMPUTER_VISION_ASSIGNMENTS_ASSIGNMENT1_VIDEO_PROCESSOR_H_
+#define COMPUTER_VISION_ASSIGNMENTS_ASSIGNMENT1_VIDEO_PROCESSOR_H_
 
 #include <opencv2/opencv.hpp>
 #include <vector>
 
+#include "computer-vision/assignments/assignment1/ImageProcessor.h"
+
 namespace cv_project {
 namespace assignment1 {
 
-class VedioProcessor {
+class VideoProcessor {
  public:
-  explicit VedioProcessor(const std::string &input_video_path,
+  explicit VideoProcessor(const std::string &input_video_path,
                           const std::string &output_video_path,
                           const std::string &window_name = "video");
-  ~VedioProcessor() {
+  ~VideoProcessor() {
     video_capture_.release();
+    video_writer_.release();
     cv::destroyAllWindows();
   };
 
@@ -38,6 +41,11 @@ class VedioProcessor {
 
   double frame_rate_;
   double frame_count_;
+  double frame_width_;
+  double frame_height_;
+  double frame_delay_time_;
+
+  ImageProcessor image_processor_;
 };
 
 }  // namespace assignment1
