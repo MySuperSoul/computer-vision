@@ -6,6 +6,7 @@ cc_binary(
     name = "assignment1",
     srcs = ["main.cc"],
     deps = [
-        "//projects/common:argparser",
+        "//computer-vision/assignments/common:argparser",
+        "//computer-vision/assignments/common:util",
     ],
 )

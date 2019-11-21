@@ -1,5 +1,5 @@
-#ifndef CV_PROJECTS_ARGPARSER_H_
-#define CV_PROJECTS_ARGPARSER_H_
+#ifndef COMPUTER_VISION_ASSIGNMENTS_COMMON_ARGPARSER_H_
+#define COMPUTER_VISION_ASSIGNMENTS_COMMON_ARGPARSER_H_
 
 #include <getopt.h>
 
@@ -18,6 +18,7 @@ class Args {
  public:
   std::string data_dir;
   std::string save_dir;
+  std::string vedioname;
   bool help{false};
 
  public:
@@ -29,6 +30,7 @@ class Args {
           {"help", no_argument, 0, 'h'},
           {"datadir", required_argument, 0, 'd'},
           {"savedir", required_argument, 0, 's'},
+          {"vedioname", required_argument, 0, 'v'},
           {nullptr, 0, nullptr, 0}};
 
       int option_index = 0;
@@ -57,9 +59,24 @@ class Args {
             return false;
           }
           break;
+        case 'v':
+          if (optarg) {
+            vedioname = optarg;
+          } else {
+            std::cerr
+                << "videoname requires argument to match the input vedio file"
+                << std::endl;
+            return false;
+          }
+          break;
         default:
           return false;
       }
+    }
+
+    if (data_dir.empty() || save_dir.empty() || vedioname.empty()) {
+      std::cerr << "datadir, savedir, vedioname must be sprcified" << std::endl;
+      return false;
     }
     return true;
   }

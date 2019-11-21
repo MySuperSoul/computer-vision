@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include "projects/common/argparser.h"
+#include "computer-vision/assignments/common/argparser.h"
+#include "computer-vision/assignments/common/util.h"
 
-void printHelpInfo() {
+void PrintHelpInfo() {
   std::cout << "Usage: ./bazel-bin/assignment1/assignment1 [-h or "
                "--help] [-d or --datadir=<path to data directory>] [-s or "
-               "--savedir=<path to store the output>]"
+               "--savedir=<path to store the output>] [-v or "
+               "--vedioname=<filename of input vedio file>]"
             << std::endl;
   std::cout << "--help      Display help information" << std::endl;
   std::cout << "--datadir   Specify data directory, required argument here"
@@ -13,23 +15,27 @@ void printHelpInfo() {
   std::cout
       << "--savedir   Specify output directory to store, required argument here"
       << std::endl;
+  std::cout << "--vedioname    Specify input vedio filename" << std::endl;
 }
 
 int main(int argc, char **argv) {
   cv_project::cv_common::Args args;
-  bool argsOK = args.parseArgs(argc, argv);
+  bool args_ok = args.parseArgs(argc, argv);
 
   if (args.help) {
-    printHelpInfo();
+    PrintHelpInfo();
     return 0;
   }
 
-  if (!argsOK) {
+  if (!args_ok) {
     std::cerr << "Invalid arguments occur" << std::endl;
-    printHelpInfo();
+    PrintHelpInfo();
     return -1;
   }
 
-  std::cout << args.data_dir << " " << args.save_dir << std::endl;
+  cv::Mat a = cv::imread("/roadstar/computer-vision/data/1.png");
+  cv::imshow("test", a);
+  cv::waitKey(0);
+
   return 0;
 }
