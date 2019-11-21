@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "computer-vision/assignments/assignment1/VedioProcessor.h"
 #include "computer-vision/assignments/common/argparser.h"
 #include "computer-vision/assignments/common/util.h"
 
@@ -33,9 +34,9 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  cv::Mat a = cv::imread("/roadstar/computer-vision/data/1.png");
-  cv::imshow("test", a);
-  cv::waitKey(0);
-
+  std::string video_full_path =
+      cv_project::cv_common::GetValidFullPath(args.data_dir) + args.vedioname;
+  cv_project::assignment1::VedioProcessor processor(video_full_path);
+  processor.Play(false);
   return 0;
 }
