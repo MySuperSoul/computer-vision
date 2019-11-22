@@ -5,11 +5,9 @@ usermod -aG sudo "$DOCKER_USER"
 echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 echo '
-export PATH=${PATH}:/computer-vision/scripts
-if [ -e "/apollo/scripts/apollo_base.sh" ]; then
-  source /apollo/scripts/apollo_base.sh
-fi
+export PATH=${PATH}:/home/${USER}/computer-vision/scripts
 ulimit -c unlimited
+export LD_LIBRARY_PATH=/usr/local/opencv-3.3.1/lib
 ' >> "/home/${DOCKER_USER}/.bashrc"
 
 echo '

@@ -44,11 +44,13 @@ function main() {
     -e DOCKER_GRP_ID=$GRP_ID \
     -e DOCKER_HOME=$DOCKER_HOME \
     -e DOCKER_IMG=$IMG \
-    -v $LOCAL_DIR:/computer-vision \
+    -v $LOCAL_DIR:$DOCKER_HOME/computer-vision \
+    -v $LOCAL_DIR/WORKSPACE:$DOCKER_HOME/WORKSPACE \
+    -v $LOCAL_DIR/third_party:$DOCKER_HOME/third_party \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v /media:/media \
     -v /dev/null:/dev/raw1394 \
-    -w /computer-vision \
+    -w $DOCKER_HOME \
     --dns=114.114.114.114 \
     --add-host in_docker:127.0.0.1 \
     --hostname in_docker \
@@ -62,7 +64,7 @@ function main() {
   fi
 
   if [ "${USER}" != "root" ]; then
-    docker exec $DOCKER_NAME bash -c '/computer-vision/scripts/before_start.sh'
+    docker exec $DOCKER_NAME bash -c "${DOCKER_HOME}/computer-vision/scripts/before_start.sh"
   fi
 
   echo "Finished setting up cv docker environment. Now you can enter with: bash scripts/docker_into.sh"

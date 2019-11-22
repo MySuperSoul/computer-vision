@@ -7,7 +7,9 @@
 #include "computer-vision/assignments/common/util.h"
 
 void PrintHelpInfo() {
-  std::cout << "Usage: ./bazel-bin/assignment1/assignment1 [-h or "
+  std::cout << "Usage: "
+               "./bazel-bin/computer-vision/assignments/assignment1/"
+               "assignment1 [-h or "
                "--help] [-d or --datadir=<path to data directory>] [-s or "
                "--savepath=<path to store the output>] [-v or "
                "--videoname=<filename of input video file>]"
