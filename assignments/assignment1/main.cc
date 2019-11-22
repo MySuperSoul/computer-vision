@@ -10,7 +10,7 @@ void PrintHelpInfo() {
   std::cout << "Usage: ./bazel-bin/assignment1/assignment1 [-h or "
                "--help] [-d or --datadir=<path to data directory>] [-s or "
                "--savepath=<path to store the output>] [-v or "
-               "--vedioname=<filename of input vedio file>]"
+               "--videoname=<filename of input video file>]"
             << std::endl;
   std::cout << "--help      Display help information" << std::endl;
   std::cout << "--datadir   Specify data directory, required argument here"
@@ -18,7 +18,7 @@ void PrintHelpInfo() {
   std::cout << "--savepath   Specify output directory to store, required "
                "argument here"
             << std::endl;
-  std::cout << "--vedioname    Specify input vedio filename" << std::endl;
+  std::cout << "--videoname    Specify input video filename" << std::endl;
 }
 
 int main(int argc, char **argv) {

@@ -39,8 +39,9 @@ class Util {
     }
   }
 
-  static inline int GetRandNum(const int &a, const int &b) {
-    return (rand() % (b - a + 1)) + a;
+  static inline int GetRandNum(const int &left_bound, const int &right_bound) {
+    // requires that left_bound is lower than right_bound
+    return (rand() % (right_bound - left_bound + 1)) + left_bound;
   }
 };
 

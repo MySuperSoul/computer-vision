@@ -13,6 +13,7 @@ int kthickness = 2;
 int kid_diff = 70;
 int kname_diff = 30;
 int kframes_store = 20;
+int kchannels = 3;
 cv::Scalar kfont_color = cv::Scalar(0, 0, 255);
 }  // namespace
 
@@ -125,7 +126,7 @@ void VideoProcessor::Process(const std::vector<cv::String> &image_paths) {
   for (int i = 0; i < frame_count_; i++) {
     video_capture_.read(image_);
     if (image_.cols == frame_width_ && image_.rows == frame_height_ &&
-        image_.channels() == 3) {
+        image_.channels() == kchannels) {
       video_writer_.write(image_);
     }
   }
