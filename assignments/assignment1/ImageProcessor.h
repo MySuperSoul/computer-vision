@@ -1,6 +1,7 @@
 #ifndef COMPUTER_VISION_ASSIGNMENTS_ASSIGNMENT1_IMAGE_PROCESSOR_H_
 #define COMPUTER_VISION_ASSIGNMENTS_ASSIGNMENT1_IMAGE_PROCESSOR_H_
 
+#include <ctime>
 #include <opencv2/opencv.hpp>
 #include <vector>
 
@@ -26,6 +27,9 @@ class ImageProcessor {
 
   void ExpandFromMiddle(const cv::Mat &last_frame, const cv::Mat &current_frame,
                         std::vector<cv::Mat> *concat_images);
+
+ private:
+  int rand_index_;
 };
 
 }  // namespace assignment1

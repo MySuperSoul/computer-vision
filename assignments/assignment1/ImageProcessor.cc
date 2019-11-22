@@ -71,9 +71,25 @@ void ImageProcessor::ExpandFromMiddle(const cv::Mat &last_frame,
 void ImageProcessor::GetConcatImages(const cv::Mat &last_frame,
                                      const cv::Mat &current_frame,
                                      std::vector<cv::Mat> *concat_images) {
-  SlowlyChangeThroughImages(last_frame, current_frame, concat_images);
-  ShiftFromLeft(last_frame, current_frame, concat_images);
-  ShiftFromRight(last_frame, current_frame, concat_images);
+  srand(static_cast<unsigned>(std::time(nullptr)));
+  rand_index_ = cv_common::Util::GetRandNum(1, kfunc_num);
+  std::cout << rand_index_ << std::endl;
+  switch (rand_index_) {
+    case 1:
+      SlowlyChangeThroughImages(last_frame, current_frame, concat_images);
+      break;
+    case 2:
+      ShiftFromLeft(last_frame, current_frame, concat_images);
+      break;
+    case 3:
+      ShiftFromRight(last_frame, current_frame, concat_images);
+      break;
+    case 4:
+      ExpandFromMiddle(last_frame, current_frame, concat_images);
+      break;
+    default:
+      return;
+  }
 }
 
 }  // namespace assignment1
