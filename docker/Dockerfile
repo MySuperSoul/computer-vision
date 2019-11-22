@@ -51,18 +51,6 @@ RUN apt-get update -y && apt-get install -y \
   apt-get clean autoclean && \
   rm -rf /var/lib/apt/lists/*
 
-
-# install gcc8
-RUN apt-get update && apt-get install -y gcc-5 g++-5 && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 \
-                        --slave /usr/bin/g++ g++ /usr/bin/g++-5 \
-                        --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-5 \
-                        --slave /usr/bin/gcc-nm gcc-nm /usr/bin/gcc-nm-5 \
-                        --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-5 \
-                        --slave /usr/bin/gcov gcov /usr/bin/gcov-5 && \
-                        apt-get clean autoclean && rm -rf /var/lib/apt/lists/*
-
-
 # install bazel
 WORKDIR /tmp
 RUN wget http://release.fabu.ai/deps/bazel-0.17.1-installer-linux-x86_64.sh && \
@@ -82,4 +70,3 @@ RUN wget http://release.fabu.ai/deps/opencv-3.3.1.download.tar.gz && \
   make -j"$(nproc)" && \
   make install -j"$(nproc)" && \
   cd / && rm -rf /tmp/*
-# RUN mkdir -p /usr/local/opencv-3.3.1 && wget -O- http://release.fabu.ai/deps/opencv-3.3.1.tar.gz | tar -zxvf - --strip-components=1 -C /usr/local/opencv-3.3.1 && echo /usr/local/opencv-3.3.1/lib > /etc/ld.so.conf.d/opencv-3.3.1.conf && ldconfig
