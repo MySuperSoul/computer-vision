@@ -33,7 +33,7 @@ void ImageProcessor::ShiftFromLeft(const cv::Mat &last_frame,
     int end_pos = std::min(start_pos + per_iter, cols);
     current_frame.colRange(start_pos, end_pos)
         .copyTo(image.colRange(start_pos, end_pos));
-    concat_images->push_back(image);
+    concat_images->push_back(image.clone());
   }
 }
 
@@ -48,7 +48,7 @@ void ImageProcessor::ShiftFromRight(const cv::Mat &last_frame,
     int start_pos = std::max(0, end_pos - per_iter);
     current_frame.colRange(start_pos, end_pos)
         .copyTo(image.colRange(start_pos, end_pos));
-    concat_images->push_back(image);
+    concat_images->push_back(image.clone());
   }
 }
 
@@ -62,16 +62,15 @@ void ImageProcessor::ExpandFromMiddle(const cv::Mat &last_frame,
   cv::Mat image = cv::Mat::ones(last_frame.rows, last_frame.cols, CV_8UC3);
   for (int i = 1; i <= kstore; i++) {
     int x = center_x - per_iter_x * i, y = center_y - per_iter_y * i;
-    last_frame(cv::Rect(x, y, 2 * i * per_iter_x, 2 * i * per_iter_y))
+    current_frame(cv::Rect(x, y, 2 * i * per_iter_x, 2 * i * per_iter_y))
         .copyTo(image(cv::Rect(x, y, 2 * i * per_iter_x, 2 * i * per_iter_y)));
-    concat_images->push_back(image);
+    concat_images->push_back(image.clone());
   }
 }
 
 void ImageProcessor::GetConcatImages(const cv::Mat &last_frame,
                                      const cv::Mat &current_frame,
                                      std::vector<cv::Mat> *concat_images) {
-  srand(static_cast<unsigned>(std::time(nullptr)));
   rand_index_ = cv_common::Util::GetRandNum(1, kfunc_num);
   std::cout << rand_index_ << std::endl;
   switch (rand_index_) {
