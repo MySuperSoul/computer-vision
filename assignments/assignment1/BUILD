@@ -27,6 +27,7 @@ cc_library(
     srcs = ["ImageProcessor.cc"],
     hdrs = ["ImageProcessor.h"],
     deps = [
+        "//computer-vision/assignments/common:util",
         "@opencv3//:common",
     ],
 )

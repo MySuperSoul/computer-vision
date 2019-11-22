@@ -1,11 +1,14 @@
 #include "computer-vision/assignments/assignment1/ImageProcessor.h"
 
+#include "computer-vision/assignments/common/util.h"
+
 namespace cv_project {
 namespace assignment1 {
 
 namespace {
 int kstore = 20;
-}
+int kfunc_num = 4;
+}  // namespace
 
 void ImageProcessor::SlowlyChangeThroughImages(
     const cv::Mat &last_frame, const cv::Mat &current_frame,
@@ -45,6 +48,22 @@ void ImageProcessor::ShiftFromRight(const cv::Mat &last_frame,
     int start_pos = std::max(0, end_pos - per_iter);
     current_frame.colRange(start_pos, end_pos)
         .copyTo(image.colRange(start_pos, end_pos));
+    concat_images->push_back(image);
+  }
+}
+
+void ImageProcessor::ExpandFromMiddle(const cv::Mat &last_frame,
+                                      const cv::Mat &current_frame,
+                                      std::vector<cv::Mat> *concat_images) {
+  int cols = last_frame.cols, rows = last_frame.rows;
+  int center_x = cols / 2, center_y = rows / 2;
+  int per_iter_x = cols / (2 * kstore), per_iter_y = rows / (2 * kstore);
+
+  cv::Mat image = cv::Mat::ones(last_frame.rows, last_frame.cols, CV_8UC3);
+  for (int i = 1; i <= kstore; i++) {
+    int x = center_x - per_iter_x * i, y = center_y - per_iter_y * i;
+    last_frame(cv::Rect(x, y, 2 * i * per_iter_x, 2 * i * per_iter_y))
+        .copyTo(image(cv::Rect(x, y, 2 * i * per_iter_x, 2 * i * per_iter_y)));
     concat_images->push_back(image);
   }
 }

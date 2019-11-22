@@ -37,13 +37,14 @@ int main(int argc, char **argv) {
   }
 
   std::string video_full_path =
-      cv_project::cv_common::GetValidFullPath(args.data_dir) + args.videoname;
+      cv_project::cv_common::Util::GetValidFullPath(args.data_dir) +
+      args.videoname;
 
   std::unique_ptr<cv_project::assignment1::VideoProcessor> processor;
   processor.reset(new cv_project::assignment1::VideoProcessor(video_full_path,
                                                               args.save_path));
-  processor->Process(cv_project::cv_common::GetAllImagePaths(
-      cv_project::cv_common::GetValidFullPath(args.data_dir)));
+  processor->Process(cv_project::cv_common::Util::GetAllImagePaths(
+      cv_project::cv_common::Util::GetValidFullPath(args.data_dir)));
 
   processor.reset(new cv_project::assignment1::VideoProcessor(args.save_path,
                                                               args.save_path));

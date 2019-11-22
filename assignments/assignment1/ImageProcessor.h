@@ -23,6 +23,9 @@ class ImageProcessor {
 
   void ShiftFromLeft(const cv::Mat &last_frame, const cv::Mat &current_frame,
                      std::vector<cv::Mat> *concat_images);
+
+  void ExpandFromMiddle(const cv::Mat &last_frame, const cv::Mat &current_frame,
+                        std::vector<cv::Mat> *concat_images);
 };
 
 }  // namespace assignment1
