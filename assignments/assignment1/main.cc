@@ -17,10 +17,17 @@ void PrintHelpInfo() {
   std::cout << "--help      Display help information" << std::endl;
   std::cout << "--datadir   Specify data directory, required argument here"
             << std::endl;
-  std::cout << "--savepath   Specify output directory to store, required "
+  std::cout << "--savepath   Specify output absolute path to store the output "
+               "video, required "
                "argument here"
             << std::endl;
   std::cout << "--videoname    Specify input video filename" << std::endl;
+  std::cout
+      << "example: "
+         "./bazel-bin/computer-vision/assignments/assignment1/assignment1 "
+         "--datadir=/home/huangyifei/data --videoname=video.flv "
+         "--savepath=/home/huangyifei/data/output.avi"
+      << std::endl;
 }
 
 int main(int argc, char **argv) {
