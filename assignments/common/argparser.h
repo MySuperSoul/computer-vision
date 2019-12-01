@@ -19,6 +19,7 @@ class Args {
   std::string data_dir;
   std::string save_path;
   std::string videoname;
+  std::string input_image;
   bool help{false};
 
  public:
@@ -31,6 +32,7 @@ class Args {
           {"datadir", required_argument, 0, 'd'},
           {"savepath", required_argument, 0, 's'},
           {"videoname", required_argument, 0, 'v'},
+          {"input", required_argument, 0, 'i'},
           {nullptr, 0, nullptr, 0}};
 
       int option_index = 0;
@@ -69,16 +71,16 @@ class Args {
             return false;
           }
           break;
+        case 'i':
+          if (optarg) {
+            input_image = optarg;
+          }
+          break;
         default:
           return false;
       }
     }
 
-    if (data_dir.empty() || save_path.empty() || videoname.empty()) {
-      std::cerr << "datadir, savepath, videoname must be sprcified"
-                << std::endl;
-      return false;
-    }
     return true;
   }
 };
