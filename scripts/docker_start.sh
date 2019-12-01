@@ -50,6 +50,7 @@ function main() {
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v /media:/media \
     -v /dev/null:/dev/raw1394 \
+    -v $HOME/.cache:$DOCKER_HOME/.cache \
     -w $DOCKER_HOME \
     --dns=114.114.114.114 \
     --add-host in_docker:127.0.0.1 \
