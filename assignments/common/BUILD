@@ -17,3 +17,12 @@ cc_library(
         "@opencv3//:common",
     ],
 )
+
+cc_library(
+    name = "renderer",
+    srcs = [],
+    hdrs = ["renderer.h"],
+    deps = [
+        "@opencv3//:common",
+    ],
+)
