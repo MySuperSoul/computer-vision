@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "computer-vision/assignments/assignment2/HW2Argparser.h"
 #include "computer-vision/assignments/assignment2/KeyPointsFinder.h"
-#include "computer-vision/assignments/common/argparser.h"
 #include "computer-vision/assignments/common/renderer.h"
 
 namespace {
@@ -53,7 +53,7 @@ void ProcessImage(cv::Mat *image) {
 }
 
 int main(int argc, char **argv) {
-  cv_project::cv_common::Args args;
+  cv_project::assignment2::HW2Argparser args;
   bool args_ok = args.parseArgs(argc, argv);
 
   if (args.help) {
