@@ -2,8 +2,8 @@
 
 #include <iostream>
 
+#include "computer-vision/assignments/assignment1/HW1Argparser.h"
 #include "computer-vision/assignments/assignment1/VideoProcessor.h"
-#include "computer-vision/assignments/common/argparser.h"
 #include "computer-vision/assignments/common/util.h"
 
 void PrintHelpInfo() {
@@ -31,7 +31,7 @@ void PrintHelpInfo() {
 }
 
 int main(int argc, char **argv) {
-  cv_project::cv_common::Args args;
+  cv_project::assignment1::HW1Argparser args;
   bool args_ok = args.parseArgs(argc, argv);
 
   if (args.help) {

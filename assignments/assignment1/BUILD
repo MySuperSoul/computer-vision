@@ -6,8 +6,8 @@ cc_binary(
     name = "assignment1",
     srcs = ["main.cc"],
     deps = [
+        ":hw1_argparser",
         ":video_processor",
-        "//computer-vision/assignments/common:argparser",
         "//computer-vision/assignments/common:util",
     ],
 )
@@ -30,4 +30,11 @@ cc_library(
         "//computer-vision/assignments/common:util",
         "@opencv3//:common",
     ],
+)
+
+cc_library(
+    name = "hw1_argparser",
+    srcs = [],
+    hdrs = ["HW1Argparser.h"],
+    deps = ["//computer-vision/assignments/common:argparser"],
 )
