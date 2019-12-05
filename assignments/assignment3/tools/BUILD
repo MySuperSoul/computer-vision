@@ -6,6 +6,7 @@ cc_binary(
     name = "show_all_with_mask",
     srcs = ["show_all_with_mask.cc"],
     deps = [
+        "//computer-vision/assignments/assignment3/preprocessor:image_preprocessor",
         "//computer-vision/assignments/assignment3/preprocessor:roi_creater",
         "//computer-vision/assignments/common:util",
         "@opencv3//:common",

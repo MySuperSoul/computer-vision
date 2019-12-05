@@ -1,7 +1,7 @@
 #include <fstream>
 #include <opencv2/opencv.hpp>
 
-#include "computer-vision/assignments/assignment3/preprocessor/roi_creater.h"
+#include "computer-vision/assignments/assignment3/preprocessor/image_preprocessor.h"
 #include "computer-vision/assignments/common/util.h"
 
 namespace {
@@ -14,13 +14,15 @@ int main(int argc, char **argv) {
   input.open(kPrefix + "all-images.txt");
 
   std::string s, eye;
-  std::unique_ptr<cv_project::assignment3::RoiCreater> roi_creater;
-  roi_creater.reset(new cv_project::assignment3::RoiCreater());
+  std::unique_ptr<cv_project::assignment3::ImagePreprocessor>
+      image_preprocessor;
+  image_preprocessor.reset(new cv_project::assignment3::ImagePreprocessor());
 
   while (std::getline(input, s)) {
     std::string image_path = s.substr(0, s.find_first_of(" "));
-    roi_creater->SetImagePath(image_path);
-    cv::Mat a = roi_creater->GetFaceRoiFrame();
+    image_preprocessor->SetImagePath(image_path);
+    cv::Mat a;
+    image_preprocessor->GerProcessedFaceRoi(&a);
     // std::string eye_path =
     //    cv_project::cv_common::Util::ReplacePostFix(image_path, "txt");
     // eye_input.open(eye_path);

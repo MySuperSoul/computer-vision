@@ -11,3 +11,10 @@ cc_library(
         "@opencv3//:common",
     ],
 )
+
+cc_library(
+    name = "image_preprocessor",
+    srcs = ["image_preprocessor.cc"],
+    hdrs = ["image_preprocessor.h"],
+    deps = [":roi_creater"],
+)
