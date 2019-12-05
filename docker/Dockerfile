@@ -53,15 +53,15 @@ RUN apt-get update -y && apt-get install -y \
 
 # install bazel
 WORKDIR /tmp
-RUN wget http://release.fabu.ai/deps/bazel-0.17.1-installer-linux-x86_64.sh && \
+RUN wget https://github.com/bazelbuild/bazel/releases/download/0.17.1/bazel-0.17.1-installer-linux-x86_64.sh && \
   chmod +x bazel-0.17.1-installer-linux-x86_64.sh && \
   ./bazel-0.17.1-installer-linux-x86_64.sh --prefix=/usr && \
   cd / && rm -rf /tmp/*
 
 # install opencv-3.3.1
 WORKDIR /tmp
-RUN wget http://release.fabu.ai/deps/opencv-3.3.1.download.tar.gz && \
-  tar -zxvf opencv-3.3.1.download.tar.gz && \
+RUN wget https://github.com/opencv/opencv/archive/3.3.1.tar.gz && \
+  tar -zxvf opencv-3.3.1.tar.gz && \
   mkdir -p opencv-3.3.1/build && \
   cd opencv-3.3.1/build && \
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
