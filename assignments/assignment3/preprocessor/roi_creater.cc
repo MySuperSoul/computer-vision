@@ -35,10 +35,26 @@ void RoiCreater::ReadEyePosition() {
 }
 
 cv::Mat RoiCreater::GetFaceRoiFrame() {
-  int left_top_x = std::min(eye_x1_, eye_x2_) - xdiff_;
-  int left_top_y = std::min(eye_y1_, eye_y2_) - ydiff_;
+  if (eye_x1_ > eye_x2_) {
+    std::swap(eye_x1_, eye_x2_);
+    std::swap(eye_y1_, eye_y2_);
+  }
+
+  cv::Point center((eye_x1_ + eye_x2_) / 2, (eye_y1_ + eye_y2_) / 2);
+  double angle = std::atan((eye_y2_ - eye_y1_) * 1.0 / (eye_x2_ - eye_x1_)) *
+                 180.0 / CV_PI;
+  auto trans_matrix = cv::getRotationMatrix2D(center, angle, 1.0);
+  cv::warpAffine(frame_, frame_, trans_matrix, frame_.size());
+
+  // calculate the length of distance between eyes
+  double distance = std::sqrt(std::pow(eye_x1_ - eye_x2_, 2) +
+                              std::pow(eye_y1_ - eye_y2_, 2)) /
+                    2;
+  int left_top_x = static_cast<int>(center.x - distance - xdiff_);
+  int left_top_y = center.y - ydiff_;
 
   roi_frame_ = frame_(cv::Rect(left_top_x, left_top_y, width_, height_));
+
   return roi_frame_;
 }
 
