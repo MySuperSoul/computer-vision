@@ -50,10 +50,12 @@ cv::Mat RoiCreater::GetFaceRoiFrame() {
   double distance = std::sqrt(std::pow(eye_x1_ - eye_x2_, 2) +
                               std::pow(eye_y1_ - eye_y2_, 2)) /
                     2;
-  int left_top_x = static_cast<int>(center.x - distance - xdiff_);
-  int left_top_y = center.y - ydiff_;
+  int left_top_x = std::max(0, static_cast<int>(center.x - distance - xdiff_));
+  int left_top_y = std::max(0, center.y - ydiff_);
 
-  roi_frame_ = frame_(cv::Rect(left_top_x, left_top_y, width_, height_));
+  roi_frame_ = frame_(cv::Rect(left_top_x, left_top_y,
+                               std::min(width_, frame_.cols - left_top_x),
+                               std::min(height_, frame_.rows - left_top_y)));
 
   return roi_frame_;
 }

@@ -19,7 +19,7 @@ class ImagePreprocessor {
   ~ImagePreprocessor() = default;
 
   void SetImagePath(const std::string &image_path);
-  void GerProcessedFaceRoi(cv::Mat *face_roi);
+  void GetProcessedFaceRoi(cv::Mat *face_roi);
 
  private:
   cv::Mat roi_frame_;

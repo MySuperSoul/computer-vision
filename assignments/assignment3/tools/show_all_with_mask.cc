@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
     std::string image_path = s.substr(0, s.find_first_of(" "));
     image_preprocessor->SetImagePath(image_path);
     cv::Mat a;
-    image_preprocessor->GerProcessedFaceRoi(&a);
+    image_preprocessor->GetProcessedFaceRoi(&a);
     // std::string eye_path =
     //    cv_project::cv_common::Util::ReplacePostFix(image_path, "txt");
     // eye_input.open(eye_path);
