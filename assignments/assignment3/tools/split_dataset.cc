@@ -9,7 +9,8 @@
 namespace {
 const std::string kPrefix =
     "/roadstar/computer-vision/data/assignment3_data/lfw/";
-const int kThreshold = 4;
+const int kThresholdLow = 5;
+const int kThresholdHigh = 10;
 std::map<std::string, std::vector<std::string>> kAll;
 }  // namespace
 
@@ -27,7 +28,8 @@ void SplitDataset() {
   output_test.open(kPrefix + "test.txt", std::ios::out);
 
   for (auto iter = kAll.begin(); iter != kAll.end(); iter++) {
-    if (iter->second.size() >= kThreshold) {
+    std::reverse(iter->second.begin(), iter->second.end());
+    if (iter->second.size() >= kThresholdLow) {
       // get the last sample to be test image
       std::string s = iter->second.back();
       output_test << s + " " + iter->first + "\n";
@@ -37,10 +39,12 @@ void SplitDataset() {
 
   // write kAll to train.txt
   for (const auto &item : kAll) {
-    for (const auto &image : item.second) {
-      output_train << image + " " + item.first + "\n";
+    if (item.second.size() >= kThresholdLow) {
+      for (const auto &image : item.second) {
+        output_train << image + " " + item.first + "\n";
+      }
+      std::cout << "Done Train name: " << item.first << std::endl;
     }
-    std::cout << "Done Train name: " << item.first << std::endl;
   }
 
   output_test.close();

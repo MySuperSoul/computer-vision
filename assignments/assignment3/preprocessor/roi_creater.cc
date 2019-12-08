@@ -53,11 +53,12 @@ cv::Mat RoiCreater::GetFaceRoiFrame() {
   int left_top_x = std::max(0, static_cast<int>(center.x - distance - xdiff_));
   int left_top_y = std::max(0, center.y - ydiff_);
 
-  roi_frame_ = frame_(cv::Rect(left_top_x, left_top_y,
-                               std::min(width_, frame_.cols - left_top_x),
-                               std::min(height_, frame_.rows - left_top_y)));
+  // roi_frame_ = frame_(cv::Rect(left_top_x, left_top_y,
+  //                             std::min(width_, frame_.cols - left_top_x),
+  //                             std::min(height_, frame_.rows - left_top_y)));
+  // cv::resize(roi_frame_, roi_frame_, cv::Size(width_, height_));
 
-  return roi_frame_;
+  return frame_;
 }
 
 }  // namespace assignment3

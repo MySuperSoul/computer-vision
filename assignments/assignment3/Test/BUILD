@@ -3,8 +3,8 @@ package(
 )
 
 cc_binary(
-    name = "train",
-    srcs = ["train.cc"],
+    name = "test",
+    srcs = ["test.cc"],
     deps = [
         "//computer-vision/assignments/assignment3/Argparser:HW3Argparser",
         "//computer-vision/assignments/assignment3/handlers:processor",

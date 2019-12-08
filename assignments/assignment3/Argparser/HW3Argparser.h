@@ -12,8 +12,9 @@ class HW3Argparser : public cv_common::Args {
   ~HW3Argparser() = default;
 
  public:
-  std::string input_image;
+  std::string train_input;
   std::string model;
+  std::string mask_path;
   double energy;
 
   bool parseArgs(int argc, char *argv[]) override {
@@ -24,6 +25,7 @@ class HW3Argparser : public cv_common::Args {
           {"input", required_argument, 0, 'i'},
           {"model", required_argument, 0, 'm'},
           {"energy", required_argument, 0, 'e'},
+          {"mask", required_argument, 0, 'M'},
           {nullptr, 0, nullptr, 0}};
 
       int option_index = 0;
@@ -37,7 +39,7 @@ class HW3Argparser : public cv_common::Args {
           return false;
 
         case 'i':
-          input_image = optarg;
+          train_input = optarg;
           break;
 
         case 'm':
@@ -46,6 +48,10 @@ class HW3Argparser : public cv_common::Args {
 
         case 'e':
           energy = std::stod(optarg);
+          break;
+
+        case 'M':
+          mask_path = optarg;
           break;
 
         default:

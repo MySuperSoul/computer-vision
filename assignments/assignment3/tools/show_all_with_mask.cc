@@ -11,7 +11,7 @@ const std::string kPrefix =
 
 int main(int argc, char **argv) {
   std::ifstream input, eye_input;
-  input.open(kPrefix + "all-images.txt");
+  input.open(kPrefix + "train.txt");
 
   std::string s, eye;
   std::unique_ptr<cv_project::assignment3::ImagePreprocessor>
