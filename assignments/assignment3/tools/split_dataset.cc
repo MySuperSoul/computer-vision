@@ -8,7 +8,7 @@
 
 namespace {
 const std::string kPrefix =
-    "/roadstar/computer-vision/data/assignment3_data/att_faces/";
+    "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/";
 const int kThresholdLow = 5;
 const int kThresholdHigh = 10;
 std::map<std::string, std::vector<std::string>> kAll;

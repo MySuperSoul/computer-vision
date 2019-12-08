@@ -55,9 +55,9 @@ class Processor {
 
  private:
   std::string training_set_path_{
-      "/roadstar/computer-vision/data/assignment3_data/att_faces/train.txt"};
+      "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/train.txt"};
   std::string testing_set_path_{
-      "/roadstar/computer-vision/data/assignment3_data/att_faces/test.txt"};
+      "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/test.txt"};
   std::string model_;
   std::ifstream image_input_;
   std::map<std::string, std::string> train_images_, testing_images_;
