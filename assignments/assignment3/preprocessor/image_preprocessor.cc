@@ -9,7 +9,10 @@ void ImagePreprocessor::SetImagePath(const std::string &image_path) {
 }
 
 void ImagePreprocessor::GetProcessedFaceRoi(cv::Mat *face_roi) {
-  cv::cvtColor(roi_frame_, roi_processed_frame_, CV_BGR2GRAY);
+  roi_processed_frame_ = roi_frame_;
+  if (roi_processed_frame_.channels() == 3) {
+    cv::cvtColor(roi_frame_, roi_processed_frame_, CV_BGR2GRAY);
+  }
   cv::equalizeHist(roi_processed_frame_, roi_processed_frame_);
   *face_roi = roi_processed_frame_;
 }

@@ -20,3 +20,9 @@ cc_binary(
         "//computer-vision/assignments/common:util",
     ],
 )
+
+cc_binary(
+    name = "generate_all_images",
+    srcs = ["generate_all_images.cc"],
+    deps = ["//computer-vision/assignments/common:util"],
+)

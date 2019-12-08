@@ -18,7 +18,7 @@ class Util {
   // @param: return-> vector<String>
   static inline std::vector<cv::String> GetAllImagePaths(
       cv::String image_path) {
-    std::vector<cv::String> patterns = {"*.jpg", "*.jpeg", "*.png"};
+    std::vector<cv::String> patterns = {"*.jpg", "*.jpeg", "*.png", "*.pgm"};
     std::vector<cv::String> paths, tmps;
 
     for (auto v : patterns) {

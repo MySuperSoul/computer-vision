@@ -92,13 +92,22 @@ void Processor::Test() {
         min_index = i;
       }
     }
-    AINFO(min_distance);
 
     // output image and labels
     cv::Mat test_image, predict_image;
     test_image = cv::imread(std::string(iter->first));
     predict_image = cv::imread(std::string(train_map_[min_index].first));
 
+    cv::putText(predict_image, "Predict: " + train_map_[min_index].second,
+                {0, 20}, cv::FONT_HERSHEY_PLAIN, 0.7, {0, 0, 255});
+    cv::putText(predict_image, "Label: " + iter->second, {0, 40},
+                cv::FONT_HERSHEY_PLAIN, 0.7, {0, 255, 0});
+    cv::resize(test_image, test_image,
+               {static_cast<int>(test_image.cols * 2),
+                static_cast<int>(test_image.rows * 2)});
+    cv::resize(predict_image, predict_image,
+               {static_cast<int>(predict_image.cols * 2),
+                static_cast<int>(predict_image.rows * 2)});
     cv::imshow("Test-Image", test_image);
     cv::imshow("Predict-Image", predict_image);
     cv::waitKey(0);

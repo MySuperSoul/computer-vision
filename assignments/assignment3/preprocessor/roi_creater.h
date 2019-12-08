@@ -24,7 +24,6 @@ class RoiCreater {
   inline void SetImagePath(const std::string &frame_path) {
     frame_path_ = frame_path;
     frame_ = cv::imread(frame_path_);
-    ReadEyePosition();
   }
 
   cv::Mat GetFaceRoiFrame();

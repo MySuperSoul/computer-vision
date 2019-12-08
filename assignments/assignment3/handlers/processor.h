@@ -55,9 +55,9 @@ class Processor {
 
  private:
   std::string training_set_path_{
-      "/roadstar/computer-vision/data/assignment3_data/lfw/train.txt"};
+      "/roadstar/computer-vision/data/assignment3_data/att_faces/train.txt"};
   std::string testing_set_path_{
-      "/roadstar/computer-vision/data/assignment3_data/lfw/test.txt"};
+      "/roadstar/computer-vision/data/assignment3_data/att_faces/test.txt"};
   std::string model_;
   std::ifstream image_input_;
   std::map<std::string, std::string> train_images_, testing_images_;
@@ -65,7 +65,7 @@ class Processor {
   std::unique_ptr<ImagePreprocessor> image_preprocessor_;
   cv::Mat faces_data_, roi_frame_, eigen_vector_, eigen_values_, eigen_faces_;
   cv::FileStorage file_storage_, input_storage_;
-  int mask_width_{110}, mask_height_{135}, image_count_{0};
+  int mask_width_{92}, mask_height_{112}, image_count_{0};
   double energy_;
 };
 
