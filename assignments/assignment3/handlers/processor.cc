@@ -70,6 +70,7 @@ double CalculateDistance(const cv::Mat &image) {
 void Processor::Test() {
   input_storage_.open(model_, cv::FileStorage::READ);
   input_storage_["eigen_vector"] >> eigen_vector_;
+  input_storage_["mean_face"] >> mean_face_;
 
   cv::Mat images_data, test_data;
   faces_data_.convertTo(images_data, CV_64F);
@@ -108,8 +109,10 @@ void Processor::Test() {
     cv::resize(predict_image, predict_image,
                {static_cast<int>(predict_image.cols * 2),
                 static_cast<int>(predict_image.rows * 2)});
+
     cv::imshow("Test-Image", test_image);
     cv::imshow("Predict-Image", predict_image);
+
     cv::waitKey(0);
   }
   input_storage_.release();
@@ -142,12 +145,14 @@ void Processor::Train() {
 
   eigen_vector_ = eigen_vector_.colRange(0, num);
   file_storage_ << "eigen_vector" << eigen_vector_;
+  file_storage_ << "mean_face" << mean_mat;
   file_storage_.release();
   AINFO("Engine saved in " + model_);
 }
 
 void Processor::VectorToImage(cv::Mat *vec, cv::Mat *result_image,
-                              const int &width, const int &height) {
+                              const int &width, const int &height,
+                              bool with_normalize) {
   int data_type = (*vec).type();
   cv::Mat result(cv::Size(width, height), data_type);
   for (int i = 0; i < height; i++) {
@@ -155,8 +160,11 @@ void Processor::VectorToImage(cv::Mat *vec, cv::Mat *result_image,
         .colRange(i * width, (i + 1) * width)
         .convertTo(result.row(i), data_type);
   }
-
-  cv::normalize(result, result, 1.0, 0.0, cv::NORM_MINMAX);
+  if (with_normalize) {
+    cv::normalize(result, result, 1.0, 0.0, cv::NORM_MINMAX);
+  } else {
+    cv::normalize(result, result, 255.0, 0.0, cv::NORM_MINMAX);
+  }
   (*result_image) = result;
 }
 

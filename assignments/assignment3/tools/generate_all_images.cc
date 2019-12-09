@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
       "/home/huangyifei/tmp.log");
   std::ifstream input("/home/huangyifei/tmp.log");
   std::ofstream output_valid_path(
-      "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/"
+      "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/out/"
       "all-images.txt");
 
   std::string s;

@@ -17,7 +17,8 @@ int main(int argc, char **argv) {
   }
 
   std::unique_ptr<cv_project::assignment3::Processor> processor;
-  processor.reset(new cv_project::assignment3::Processor(args.model));
+  processor.reset(
+      new cv_project::assignment3::Processor(args.model, args.input_prefix));
   processor->Test();
   return 0;
 }

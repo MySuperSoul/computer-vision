@@ -6,7 +6,7 @@
 
 namespace {
 const std::string kPrefix =
-    "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/";
+    "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/out/";
 }
 
 int main(int argc, char **argv) {

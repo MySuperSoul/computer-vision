@@ -12,7 +12,7 @@ class HW3Argparser : public cv_common::Args {
   ~HW3Argparser() = default;
 
  public:
-  std::string train_input;
+  std::string input_prefix;
   std::string model;
   std::string mask_path;
   double energy;
@@ -39,7 +39,7 @@ class HW3Argparser : public cv_common::Args {
           return false;
 
         case 'i':
-          train_input = optarg;
+          input_prefix = optarg;
           break;
 
         case 'm':

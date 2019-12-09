@@ -39,7 +39,7 @@ class RoiCreater {
   cv::Mat roi_frame_;
   std::ifstream mask_input_;
   std::string mask_{
-      "/home/huangyifei/computer-vision/assignments/assignment3/Mask/mask.txt"};
+      "/roadstar/computer-vision/assignments/assignment3/Mask/mask.txt"};
   std::string frame_path_;
 };
 

@@ -23,19 +23,7 @@ class EyePositionCalibrator {
   }
 
   ~EyePositionCalibrator() {
-    WriteToFile();
     cv::destroyAllWindows();
-  }
-
-  inline void WriteToFile() {
-    std::ofstream output(
-        "/roadstar/computer-vision/data/assignment3_data/lfw/all-names.txt",
-        std::ios::out);
-
-    for (auto count : eyes_count_) {
-      output << count.first + " " + std::to_string(count.second) + "\n";
-    }
-    output.close();
   }
 
   inline void SetImage(const std::string &input_name, const std::string &name) {

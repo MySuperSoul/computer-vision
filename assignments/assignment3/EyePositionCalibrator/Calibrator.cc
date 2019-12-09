@@ -7,15 +7,13 @@ int main(int argc, char **argv) {
   cv_project::assignment3::EyePositionCalibrator calibrator;
 
   std::string prefix =
-      "/roadstar/computer-vision/data/assignment3_data/lfw/lfw/";
+      "/home/huangyifei/computer-vision/data/assignment3_data/att_faces/";
 
   std::system(
-      "ls /roadstar/computer-vision/data/assignment3_data/lfw/lfw/ > "
-      "/roadstar/tmp.log");
-  std::ifstream input("/roadstar/tmp.log");
+      "ls /home/huangyifei/computer-vision/data/assignment3_data/att_faces/ > "
+      "/home/huangyifei/tmp.log");
+  std::ifstream input("/home/huangyifei/tmp.log");
   std::ofstream output_eye_center;
-  std::ofstream output_valid_path(
-      "/roadstar/computer-vision/data/assignment3_data/lfw/all-images.txt");
 
   std::string s;
   while (std::getline(input, s)) {
@@ -30,15 +28,13 @@ int main(int argc, char **argv) {
         output_eye_center.open(eye_path_str, std::ios::out);
         output_eye_center << calibrator.GetEyeCenter();
         output_eye_center.close();
-        output_valid_path << path_str + " " + s + "\n";
       }
     }
     std::cout << "Done name: " << s << std::endl;
   }
 
-  std::system("rm /roadstar/tmp.log");
+  std::system("rm /home/huangyifei/tmp.log");
 
-  output_valid_path.close();
   input.close();
   return 0;
 }

@@ -35,29 +35,29 @@ void RoiCreater::ReadEyePosition() {
 }
 
 cv::Mat RoiCreater::GetFaceRoiFrame() {
-  // if (eye_x1_ > eye_x2_) {
-  //  std::swap(eye_x1_, eye_x2_);
-  //  std::swap(eye_y1_, eye_y2_);
-  //}
+  if (eye_x1_ > eye_x2_) {
+    std::swap(eye_x1_, eye_x2_);
+    std::swap(eye_y1_, eye_y2_);
+  }
 
-  // cv::Point center((eye_x1_ + eye_x2_) / 2, (eye_y1_ + eye_y2_) / 2);
-  // double angle = std::atan((eye_y2_ - eye_y1_) * 1.0 / (eye_x2_ - eye_x1_)) *
-  //               180.0 / CV_PI;
-  // auto trans_matrix = cv::getRotationMatrix2D(center, angle, 1.0);
-  // cv::warpAffine(frame_, frame_, trans_matrix, frame_.size());
+  cv::Point center((eye_x1_ + eye_x2_) / 2, (eye_y1_ + eye_y2_) / 2);
+  double angle = std::atan((eye_y2_ - eye_y1_) * 1.0 / (eye_x2_ - eye_x1_)) *
+                 180.0 / CV_PI;
+  auto trans_matrix = cv::getRotationMatrix2D(center, angle, 1.0);
+  cv::Mat rotate_frame;
+  cv::warpAffine(frame_, rotate_frame, trans_matrix, frame_.size());
 
-  //// calculate the length of distance between eyes
-  // double distance = std::sqrt(std::pow(eye_x1_ - eye_x2_, 2) +
-  //                            std::pow(eye_y1_ - eye_y2_, 2)) /
-  //                  2;
-  // int left_top_x = std::max(0, static_cast<int>(center.x - distance -
-  // xdiff_)); int left_top_y = std::max(0, center.y - ydiff_);
+  // calculate the length of distance between eyes
+  double distance = std::sqrt(std::pow(eye_x1_ - eye_x2_, 2) +
+                              std::pow(eye_y1_ - eye_y2_, 2)) /
+                    2;
+  int left_top_x = std::max(0, static_cast<int>(center.x - distance - xdiff_));
+  int left_top_y = std::max(0, center.y - ydiff_);
 
-  // roi_frame_ = frame_(cv::Rect(left_top_x, left_top_y,
-  //                             std::min(width_, frame_.cols - left_top_x),
-  //                             std::min(height_, frame_.rows - left_top_y)));
-  // cv::resize(roi_frame_, roi_frame_, cv::Size(width_, height_));
-
+  //roi_frame_ = rotate_frame(cv::Rect(
+  //    left_top_x, left_top_y, std::min(width_, std::abs(frame_.cols - left_top_x)),
+  //    std::min(height_, std::abs(frame_.rows - left_top_y))));
+  
   return frame_;
 }
 

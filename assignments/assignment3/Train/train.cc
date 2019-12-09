@@ -26,7 +26,7 @@ void PrintHelpInfo() {
   std::cout
       << "example: "
          "./bazel-bin/computer-vision/assignments/assignment3/Train/train "
-         "--input=/home/huangyifei/data/train.txt "
+         "--input=/home/huangyifei/data/att_faces/ "
          "--model=/home/huangyifei/data/face.engine "
          "--mask=/home/huangyifei/data/mask.txt --energy=0.9 "
       << std::endl;
@@ -48,8 +48,8 @@ int main(int argc, char **argv) {
   }
 
   std::unique_ptr<cv_project::assignment3::Processor> processor;
-  processor.reset(
-      new cv_project::assignment3::Processor(args.model, args.energy));
+  processor.reset(new cv_project::assignment3::Processor(
+      args.model, args.input_prefix, args.energy));
   processor->Train();
   processor->ShowEigenFaces(kFaceNum);
   return 0;
