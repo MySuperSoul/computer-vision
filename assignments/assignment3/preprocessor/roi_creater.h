@@ -12,14 +12,8 @@ namespace assignment3 {
 
 class RoiCreater {
  public:
-  explicit RoiCreater() {
-    ReadMask();
-  }
-  explicit RoiCreater(const std::string &mask) : mask_(mask) {
-    ReadMask();
-  }
-
-  ~RoiCreater() {}
+  RoiCreater() = default;
+  ~RoiCreater() = default;
 
   inline void SetImagePath(const std::string &frame_path) {
     frame_path_ = frame_path;
@@ -38,8 +32,6 @@ class RoiCreater {
   cv::Mat frame_;
   cv::Mat roi_frame_;
   std::ifstream mask_input_;
-  std::string mask_{
-      "/roadstar/computer-vision/assignments/assignment3/Mask/mask.txt"};
   std::string frame_path_;
 };
 

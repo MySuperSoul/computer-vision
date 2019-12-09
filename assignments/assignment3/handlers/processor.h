@@ -40,7 +40,7 @@ class Processor {
     training_set_path_ = out_path_prefix_ + "train.txt";
     testing_set_path_ = out_path_prefix_ + "test.txt";
     image_preprocessor_.reset(
-        new ImagePreprocessor(out_path_prefix_ + "mask.txt"));
+        new ImagePreprocessor());
     ReadImages();
   }
 

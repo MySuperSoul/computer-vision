@@ -12,10 +12,6 @@ class ImagePreprocessor {
     roi_creater_.reset(new RoiCreater());
   }
 
-  explicit ImagePreprocessor(const std::string &mask_path) {
-    roi_creater_.reset(new RoiCreater(mask_path));
-  }
-
   ~ImagePreprocessor() = default;
 
   void SetImagePath(const std::string &image_path);

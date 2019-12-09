@@ -23,11 +23,6 @@ void RoiCreater::ReadValues(const std::string &input_path,
   mask_input_.close();
 }
 
-void RoiCreater::ReadMask() {
-  std::vector<int *> value_ptrs{&xdiff_, &ydiff_, &width_, &height_};
-  ReadValues(mask_, value_ptrs);
-}
-
 void RoiCreater::ReadEyePosition() {
   std::vector<int *> value_ptrs{&eye_x1_, &eye_y1_, &eye_x2_, &eye_y2_};
   std::string eye_path = cv_common::Util::ReplacePostFix(frame_path_, "txt");
@@ -35,6 +30,7 @@ void RoiCreater::ReadEyePosition() {
 }
 
 cv::Mat RoiCreater::GetFaceRoiFrame() {
+  ReadEyePosition();
   if (eye_x1_ > eye_x2_) {
     std::swap(eye_x1_, eye_x2_);
     std::swap(eye_y1_, eye_y2_);
@@ -47,18 +43,7 @@ cv::Mat RoiCreater::GetFaceRoiFrame() {
   cv::Mat rotate_frame;
   cv::warpAffine(frame_, rotate_frame, trans_matrix, frame_.size());
 
-  // calculate the length of distance between eyes
-  double distance = std::sqrt(std::pow(eye_x1_ - eye_x2_, 2) +
-                              std::pow(eye_y1_ - eye_y2_, 2)) /
-                    2;
-  int left_top_x = std::max(0, static_cast<int>(center.x - distance - xdiff_));
-  int left_top_y = std::max(0, center.y - ydiff_);
-
-  //roi_frame_ = rotate_frame(cv::Rect(
-  //    left_top_x, left_top_y, std::min(width_, std::abs(frame_.cols - left_top_x)),
-  //    std::min(height_, std::abs(frame_.rows - left_top_y))));
-  
-  return frame_;
+  return rotate_frame;
 }
 
 }  // namespace assignment3
