@@ -57,12 +57,14 @@ class BirdViewProcessor {
   void FitPoints(cv::Point2f *object_points, cv::Point2f *image_points,
                  const std::vector<cv::Point2f> &corners);
 
+  void ShowVectorValues(cv::Point2f *object_points, cv::Point2f *image_points);
+
  private:
   int board_width_, board_height_, image_width_, image_height_, win_size_{11};
   double bird_height_{20};
   std::string image_path_, intrinsic_xml_path_;
   cv::Mat intrinsic_matrix_, distortion_coeffs_, image_, gray_image_,
-      undistort_image_;
+      undistort_image_, homography_;
   cv::FileStorage xml_input_;
 };
 
