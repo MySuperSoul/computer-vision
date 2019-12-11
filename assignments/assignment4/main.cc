@@ -4,15 +4,35 @@
 #include "computer-vision/assignments/assignment4/camera_calibration/camera_calibrator.h"
 #include "computer-vision/assignments/assignment4/hw4_argparser/HW4Argparser.h"
 
+void PrintHelpInfo() {
+  std::cout
+      << "Usage: "
+         "./bazel-bin/computer-vision/assignments/assignment4/assignment4 "
+         "[--width board_width] [--height board_height] [--num_boards max "
+         "selected board images] [--scale image scale] [--data_prefix path "
+         "prefix of the calibration data] [--xml_path path to store the xml "
+         "output] [--image_path path of bird_view image]"
+      << std::endl;
+  std::cout << "Example: "
+               "./bazel-bin/computer-vision/assignments/assignment4/"
+               "assignment4 \n --width=12 \n --height=12 \n --num_boards=20 "
+               "\n --scale=1.0 \n "
+               "--data_prefix=/home/huangyifei/data/ \n "
+               "--image_path=/home/huangyifei/data/birdseye/IMG_0220L.jpg"
+            << std::endl;
+}
+
 int main(int argc, char **argv) {
   cv_project::assignment4::HW4Argparser args;
   bool args_ok = args.parseArgs(argc, argv);
 
   if (args.help) {
+    PrintHelpInfo();
     return 0;
   }
 
   if (!args_ok) {
+    PrintHelpInfo();
     std::cerr << "Invalid arguments occur" << std::endl;
     return -1;
   }

@@ -59,7 +59,7 @@ class BirdViewProcessor {
 
  private:
   int board_width_, board_height_, image_width_, image_height_, win_size_{11};
-  double bird_height_{25};
+  double bird_height_{20};
   std::string image_path_, intrinsic_xml_path_;
   cv::Mat intrinsic_matrix_, distortion_coeffs_, image_, gray_image_,
       undistort_image_;
