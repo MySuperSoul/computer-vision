@@ -72,28 +72,6 @@ def TrainAndSaveModel(model, loss, optimizer, scheduler, device, num_epochs=30, 
     model.load_state_dict(best_model)
     return model
 
-def evaluate(model_path, test_dataloader):
-    num_test = 10000
-    # load the weights and reproduce the model here
-    model = LeNet5()
-    model.load_state_dict(torch.load(model_path, map_location='cpu'))
-    model.eval()
-
-    running_corrects = 0
-    for batch_num, testing_batch in enumerate(testDataLoader):
-        inputs, labels = testing_batch
-
-        # zero the gradient
-        optimizer.zero_grad()
-
-        with torch.set_grad_enabled(False):
-            outputs = model(inputs)
-            _, preds = torch.max(outputs, 1)
-
-        running_corrects += torch.sum(preds == labels.data)
-
-    print('Testing accuracy is {}'.format(running_corrects.double() / num_test))
-
 if __name__ == '__main__':
     args = argparse.ArgumentParser(description='Lenet5 for MNIST Torch implementation')
     args.add_argument('--lr', type=float, dest='lr', help='learning rate', default=0.01)
