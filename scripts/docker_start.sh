@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 LOCAL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+source $LOCAL_DIR/scripts/set_env.sh
 
 function main() {
-  IMG="yifeihuang/cv:latest"
+  IMG="yifeihuang/cv:${DOCKER_VERSION}"
   DOCKER_NAME="${USER}_cv"
 
   docker ps -a --format "{{.Names}}" | grep "$DOCKER_NAME" 1>/dev/null

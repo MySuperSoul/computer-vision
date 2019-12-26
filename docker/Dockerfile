@@ -20,6 +20,7 @@ RUN apt-get update -y && apt-get install -y \
   pkg-config \
   zlib1g-dev \
   python3 \
+  python3-pip \
   python3-dev \
   python \
   python-pip \
@@ -50,6 +51,10 @@ RUN apt-get update -y && apt-get install -y \
   python-numpy && \
   apt-get clean autoclean && \
   rm -rf /var/lib/apt/lists/*
+
+# install requirements
+COPY requirements.txt /tmp/requirements.txt
+RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r /tmp/requirements.txt
 
 # install bazel
 WORKDIR /tmp
