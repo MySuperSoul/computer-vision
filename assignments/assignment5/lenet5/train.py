@@ -74,12 +74,12 @@ def TrainAndSaveModel(model, loss, optimizer, scheduler, device, num_epochs=30, 
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser(description='Lenet5 for MNIST Torch implementation')
-    args.add_argument('--lr', type=float, dest='lr', help='learning rate', default=0.01)
-    args.add_argument('--momentum', type=float, dest='momentum', help='momentum value', default=0.9)
-    args.add_argument('--epoch', type=int, dest='epoch', help='training total epoch', default=10)
-    args.add_argument('--batchsize', type=int, dest='batchsize', help='batch size in every iter', default=32)
-    args.add_argument('--checkpoint', type=str, dest='checkpoint', help='checkpoint path to save', default='checkpoint/lenet.pth')
-    args.add_argument('--datapath', type=str, dest='datapath', help='MNIST dataset path', default='./data')
+    args.add_argument('--lr', type=float, dest='lr', help='learning rate, default=0.01', default=0.01)
+    args.add_argument('--momentum', type=float, dest='momentum', help='momentum value, default=0.9', default=0.9)
+    args.add_argument('--epoch', type=int, dest='epoch', help='training total epoch, default=10', default=10)
+    args.add_argument('--batchsize', type=int, dest='batchsize', help='batch size in every iter, default=32', default=32)
+    args.add_argument('--checkpoint', type=str, dest='checkpoint', help='checkpoint path to save, default=checkpoint/lenet.pth', default='checkpoint/lenet.pth')
+    args.add_argument('--datapath', type=str, dest='datapath', help='MNIST dataset path, default=./data', default='./data')
     args = args.parse_args()
 
     device = GetDevice()
@@ -87,9 +87,7 @@ if __name__ == '__main__':
     transformImg = torchvision.transforms.Compose([torchvision.transforms.ToTensor(),
                                                    torchvision.transforms.Normalize([0.5], [0.5])])
     trainSet = torchvision.datasets.MNIST(root=args.datapath, train=True, download=True, transform=transformImg)
-    testSet = torchvision.datasets.MNIST(root=args.datapath, train=False, download=True, transform=transformImg)
     trainDataLoader = DataLoader(trainSet, batch_size=args.batchsize, shuffle=True, num_workers=4)
-    testDataLoader = DataLoader(testSet, batch_size=args.batchsize, shuffle=True, num_workers=4)
 
     model = LeNet5().to(device)
     # prepare loss function, optimizer and scheduler
